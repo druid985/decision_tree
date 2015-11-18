@@ -20,7 +20,6 @@ def build_tree(tree):
     build_tree(left_tree)
     build_tree(right_tree)
 
-build_tree(tree1)
-
-tree1.printTrees()
-
+a = [0]
+print a[0]
+print a[-1]
