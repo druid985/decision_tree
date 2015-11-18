@@ -98,7 +98,12 @@ def predic(tree,row):
     else:
         return tree.result.keys()[0]
     
-def aaa(tree,min):
+def prune(tree,min):
+    
+    if tree.left_children.result is None:
+        prune(tree.left_children,min)
+    if tree.right_children.result is None:
+        prune(tree.right_children,min)
     
     if tree.left_children.result is not None and tree.right_children.result is not None :
         left,right = []

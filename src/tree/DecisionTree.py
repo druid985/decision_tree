@@ -15,12 +15,13 @@ class DecisionTree:
         self.left_children = None
         self.right_children = None
     
-    def printTree(self):
+    def printTree(self,entropy=False):
         if self.result is None:
             print self.colum,
             print ':',
             print self.colum_value,
             print '?'
+            if(entropy) : print
             
             print '    '*self.id,
             print 'T->',

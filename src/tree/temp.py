@@ -77,6 +77,6 @@ for data in my_data4:
 print '正确预测：'+str(right)+'个'
 print '错误预测：'+str(wrong)+'个'
 
-print treepredict.entropy([[1],[1],[2],[2],[2],[3],[3],[4],[4],[4],[4]])
-print treepredict.entropy([[1],[1],[2],[2],[2]])
-print treepredict.entropy([[3],[3],[4],[4],[4],[4]])
+#print treepredict.entropy([[1],[1],[2],[2],[2],[3],[3],[4],[4],[4],[4]])
+#print treepredict.entropy([[1],[1],[2],[2],[2]])
+#print treepredict.entropy([[3],[3],[4],[4],[4],[4]])
