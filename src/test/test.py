@@ -20,6 +20,6 @@ def build_tree(tree):
     build_tree(left_tree)
     build_tree(right_tree)
 
-a = [0]
-print a[0]
-print a[-1]
+a = {1:1,2:2}
+b = sum(i for i in a.values())
+print b

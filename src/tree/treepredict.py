@@ -96,7 +96,9 @@ def predic(tree,row):
         else :
             return predic(tree.right_children,row)
     else:
-        return tree.result.keys()[0]
+        count = sum(v for v in tree.result.values())
+        for k in tree.result.keys():tree.result[k] = float(tree.result[k])/count 
+        return tree.result
     
 def prune(tree,min):
     
@@ -106,7 +108,7 @@ def prune(tree,min):
         prune(tree.right_children,min)
     
     if tree.left_children.result is not None and tree.right_children.result is not None :
-        left,right = []
+        left,right = [],[]
         for v,k in tree.left_children.result.items():
             left = [[v]]*k
         for v,k in tree.right_children.result.items():
@@ -115,7 +117,7 @@ def prune(tree,min):
         gain = entropy(left+right) - (entropy(left) + entropy(right))/2
         
         if gain < min :
-            tree.left_children,tree.right_children = None
+            tree.left_children,tree.right_children = None,None
             tree.result = uniqueconts(left+right)
         
     
