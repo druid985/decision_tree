@@ -96,9 +96,10 @@ def predic(tree,row):
         else :
             return predic(tree.right_children,row)
     else:
+        result = {}
         count = sum(v for v in tree.result.values())
-        for k in tree.result.keys():tree.result[k] = float(tree.result[k])/count 
-        return tree.result
+        for k in tree.result:result[k] = float(tree.result[k])/count 
+        return result
     
 def prune(tree,min):
     
