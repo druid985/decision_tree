@@ -5,7 +5,7 @@
 import data
 import time
 
-path = 'E://workspace//kdd cup 2012//KDD Cup Track 1 Data//track1//'
+path = 'G://kdd cup 2012//KDD Cup Track 1 Data//track1//'
 rec_log_train = path + 'rec_log_train.txt'
 user_profile = path + 'user_profile.txt'
 item = path + 'item.txt'

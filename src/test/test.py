@@ -20,7 +20,5 @@ def build_tree(tree):
     build_tree(left_tree)
     build_tree(right_tree)
 
-a = {}
-a = dict.fromkeys(a,0)
-a[1] = a[1]+1
+a = range(10)
 print a

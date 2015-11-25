@@ -57,9 +57,9 @@ def buildtree(tree=None,scoref=entropy):
     base_score = scoref(rows)
     base_colum_count = len(rows[0])
     
-    if base_score == 0:
-        tree.result = uniqueconts(rows)
-        return
+#    if base_score == 0:
+#        tree.result = uniqueconts(rows)
+#        return
 
     best_gain = 0    
     best_colum = None
@@ -67,15 +67,22 @@ def buildtree(tree=None,scoref=entropy):
     best_lists = None
 
     for colum_index in range(base_colum_count-1):
+        colum_values = {}
         for row in rows:
-            set1,set2 = divideset(rows, colum_index, row[colum_index])
+            colum_values[row[colum_index]] = 1
+        
+        for value in colum_values.keys():
+            set1,set2 = divideset(rows, colum_index, value)
             gain = base_score-float(len(set1))/len(rows)*scoref(set1)-float(len(set2))/len(rows)*scoref(set2)
             if gain > best_gain:
                 best_gain = gain
                 best_colum = colum_index
-                best_colum_value = row[colum_index]
+                best_colum_value = value
                 best_lists = (set1,set2)
-                
+    
+    if tree.id == 1:
+        pass     
+       
     if best_gain>0:
         left_tree = DecisionTree.DecisionTree(rows=best_lists[0],id=tree.id+1)
         right_tree = DecisionTree.DecisionTree(rows=best_lists[1],id=tree.id+1)
@@ -88,6 +95,9 @@ def buildtree(tree=None,scoref=entropy):
         
         buildtree(left_tree)
         buildtree(right_tree)    
+    else:
+        tree.result = uniqueconts(rows)
+        return
     
 def predic(tree,row):
     if tree.result is None:

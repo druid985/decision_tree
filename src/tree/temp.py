@@ -3,6 +3,7 @@
 @author: WQ
 '''
 import treepredict
+import data
 from DecisionTree import DecisionTree
 
 my_data=[['a','USA','yes',18,'None'],
@@ -31,46 +32,21 @@ my_data2=[['a','USA','yes','18','None'],
          ['c','USA','yes','24','Basic'],
          ['d','France','yes','23','Basic']]
     
-def clean_data(file_data):
-    return_list = []
-    for s in file_data:
-        temp_list = s.split(',')
-        temp_list[0] = float(temp_list[0])
-        temp_list[1] = float(temp_list[1])
-        temp_list[2] = float(temp_list[2])
-        temp_list[3] = float(temp_list[3])
-        temp_list[-1] = temp_list[-1].replace('\n','')
-        return_list.append(temp_list)
-    return return_list
 
-file = open('../data/test_data.txt','r')
-try:
-    file_data = file.readlines()
-finally:
-    file.close()
-    
-my_data4 = clean_data(file_data)
+train_flowers = data.read_filedata('..//data//train_data.txt','ALL',',',[0,1,2,3])
+test_flowers = data.read_filedata('..//data//test_data.txt','ALL',',',[0,1,2,3])
 
-file = open('../data/train_data.txt','r')
-try:
-    file_data = file.readlines()
-finally:
-    file.close()
-
-my_data3 = clean_data(file_data)
-
-#treepredict.decisionTree.rows = my_data3
-#treepredict.buildtree()
-#treepredict.decisionTree.printTree()
-
-tree = DecisionTree(my_data3)
+tree = DecisionTree(train_flowers)
 treepredict.buildtree(tree)
 tree.printTree()
 
 right = 0
 wrong = 0
-for data in my_data4:
-    if data[-1]==treepredict.predic(tree, data):
+for flower in test_flowers:
+    result = treepredict.predic(tree, flower)
+    if flower[-1] in result:
+        if right == 49:
+            pass
         right += 1
     else:wrong += 1
         
@@ -83,6 +59,3 @@ treepredict.prune(tree, 0.95)
 
 tree.printTree()
 
-#print treepredict.entropy([[1],[1],[2],[2],[2],[3],[3],[4],[4],[4],[4]])
-#print treepredict.entropy([[1],[1],[2],[2],[2]])
-#print treepredict.entropy([[3],[3],[4],[4],[4],[4]])

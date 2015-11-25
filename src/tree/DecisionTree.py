@@ -24,6 +24,8 @@ class DecisionTree:
             
             print '    '*self.id,
             print 'T->',
+            if self.left_children is None:
+                pass
             self.left_children.printTree()
             
             print '    '*self.id,
