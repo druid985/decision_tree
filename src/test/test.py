@@ -20,6 +20,7 @@ def build_tree(tree):
     build_tree(left_tree)
     build_tree(right_tree)
 
-a = {1:1,2:2}
-b = sum(i for i in a.values())
-print b
+a = {}
+a = dict.fromkeys(a,0)
+a[1] = a[1]+1
+print a

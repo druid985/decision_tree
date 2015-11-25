@@ -4,28 +4,46 @@ Created on 2015-11-20
 @author: BXD
 '''
 
-def clean_data(file_data):
-    return_list = []
-    for s in file_data:
-        temp_list = s.split(',')
-        temp_list[0] = float(temp_list[0])
-        temp_list[1] = float(temp_list[1])
-        temp_list[2] = float(temp_list[2])
-        temp_list[3] = float(temp_list[3])
-        temp_list[-1] = temp_list[-1].replace('\n','')
-        return_list.append(temp_list)
-    return return_list
+def clean_data(lines,split,floatList):
+    for i,v in enumerate(lines):
+        lines[i] = v.split(split)
+        lines[i][-1] = lines[i][-1].replace('\n','')
+        for j in range(len(lines[i])):
+            if j in floatList : lines[i][j] = float(lines[i][j])
+        
 
-def read_filedata(filename):
-    file = open(filename,'r')
-    return clean_data(file.readlines())
+def read_filedata(path,count='ALL',split=',',floatList=[]):
+    file = open(path,'r')
+    lines = []
+    
+    if count=='ALL':
+        lines = file.readlines()
+    else:
+        for i in range(count):
+            lines.append(file.readline())
+    file.close()
+    
+    clean_data(lines,split,floatList)
+    
+    return lines
 
-file = open('E://workspace//kdd cup 2012//KDD Cup Track 1 Data//track1//rec_log_train.txt')
-lines = []
-i = 0
-while(i<1000000):
-    line = file.readline()
-    lines.append(line)
-    i+=1
-print len(lines)
-file.close()
+#def read_filedata(path,count='ALL',split=',',floatList=[]):
+#    file = open(path,'r')
+#    lines = []
+#    
+#    if count=='ALL':
+#        lines = file.readlines()
+#    else:
+#        for i in range(count):
+#            lines.append(file.readline())
+#    file.close()
+#    
+#    clean_data(lines,split,floatList)
+#    
+#    return lines
+
+def select(data1,data2,index):
+    for i in range(len(data1)):
+        for line in data2:
+            if data1[i][index] in line:
+                data1[i] += line
