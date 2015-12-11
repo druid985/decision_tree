@@ -1,5 +1,10 @@
 #coding=utf-8
 import json  
+import feedparser
+import urllib2
+from bs4 import BeautifulSoup
+from lxml import etree
+
 '''
 Created on 2015-11-9
 
@@ -17,16 +22,10 @@ critics={'李楠':{'一代宗师':'2.5','小时代':'3.5','钢铁侠':'2.0','蜘
          '王瑞元':{'一代宗师':'0.5','小时代':'4.5','超人':'1.0','蝙蝠侠':'3.5','星际穿越':'3.0','007':'3.0'},
          '大宝':{'我爱你':'0.5','小时代3':'4.5','超人2':'1.0','蝙蝠侠2':'3.5'}}
 
-a = ['测试','啊啊']
-b='测试是'
-
-k = json.JSONEncoder().encode(critics)
-j = json.loads(k)
-for key in j:
-    key_chs = key.decode('utf-8').encode('utf-8')
-#    print key_chs, type(j[key])
+c = urllib2.urlopen('http://tieba.baidu.com')
+contents = c.read()
+soup = BeautifulSoup(contents,'lxml')
+for link in soup.find_all('a'):
+    print(link.get('href'))
     
-a = [('a',3),('c',2),('b',4)]
-a.sort()
-#a.reverse()
-print a
+

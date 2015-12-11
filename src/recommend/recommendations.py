@@ -149,6 +149,8 @@ def calculateSimilarItems(prefs,n=10):
     return result
     
 print_new(getRecommendations(critics2,'C'))
+#itemPrefs = transformPrefs(critics2)
+#print_new(getRecommendedItems(critics2,'C',itemPrefs))
 print_new(getRecommendedItems(critics2,'C'))
 #print_new(transformPrefs(critics2))
 #print_new(calculateSimilarItems(critics2))
