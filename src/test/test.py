@@ -1,9 +1,7 @@
 #coding=utf-8
-import json  
-import feedparser
 import urllib2
-from bs4 import BeautifulSoup
-from lxml import etree
+from tools.tool import getPage
+from BeautifulSoup import BeautifulSoup
 
 '''
 Created on 2015-11-9
@@ -22,10 +20,21 @@ critics={'李楠':{'一代宗师':'2.5','小时代':'3.5','钢铁侠':'2.0','蜘
          '王瑞元':{'一代宗师':'0.5','小时代':'4.5','超人':'1.0','蝙蝠侠':'3.5','星际穿越':'3.0','007':'3.0'},
          '大宝':{'我爱你':'0.5','小时代3':'4.5','超人2':'1.0','蝙蝠侠2':'3.5'}}
 
-c = urllib2.urlopen('http://tieba.baidu.com')
-contents = c.read()
-soup = BeautifulSoup(contents,'lxml')
-for link in soup.find_all('a'):
-    print(link.get('href'))
+url_base = 'http://zhidao.baidu.com'
+url_resouce = '/question/1432695535674275539.html'
+url_para = '?push=asking&entry=qb_home_new'
+html = getPage(url_base,'','')
+
+if html is None or html == '':print 'html读取失败'
+open('a.html','w+').write(html)
+soup = BeautifulSoup(html)
+url_list = []
+for link in soup('a'):
+    url = link.get('href')
+    if url[0] == '/' : url_list.append(url_base+url)
+    elif url[0:4] == 'http' : url_list.append(url)
+    else : pass
+
+for url in url_list : print url 
     
 
