@@ -1,6 +1,8 @@
-#Wed Dec 09 10:47:44 CST 2015
+#Tue Dec 15 11:33:01 CST 2015
 eclipse.preferences.version=1
+encoding//src/recommend/crawler.py=utf-8
 encoding//src/recommend/recommendations.py=UTF-8
 encoding//src/test/test.py=utf-8
+encoding//src/tools/tool.py=utf-8
 encoding//src/tree/temp.py=utf-8
 encoding//src/tree/treepredict.py=utf-8

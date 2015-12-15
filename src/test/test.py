@@ -23,7 +23,7 @@ critics={'李楠':{'一代宗师':'2.5','小时代':'3.5','钢铁侠':'2.0','蜘
 url_base = 'http://zhidao.baidu.com'
 url_resouce = '/question/1432695535674275539.html'
 url_para = '?push=asking&entry=qb_home_new'
-html = getPage(url_base,'','')
+html = getPage(url_base+url_resouce+url_para)
 
 if html is None or html == '':print 'html读取失败'
 open('a.html','w+').write(html)
@@ -31,6 +31,7 @@ soup = BeautifulSoup(html)
 url_list = []
 for link in soup('a'):
     url = link.get('href')
+    if url is None or url == '' : continue
     if url[0] == '/' : url_list.append(url_base+url)
     elif url[0:4] == 'http' : url_list.append(url)
     else : pass
